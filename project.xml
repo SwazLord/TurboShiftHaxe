@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="TurboShiftHaxe" package="com.theamaturedev.turboshifthaxe" version="1.0.0" company="The Amature Dev" />
+	<app main="Main" path="bin" file="TurboShiftHaxe" />
+
+	<window width="640" height="960" orientation="portrait" background="0xffffff" allow-high-dpi="true" fps="60" />
+	<window depth-buffer="true" stencil-buffer="true" />
+
+	<source path="src" />
+	<source path="code" />
+	
+	<haxelib name="openfl" />
+	<haxelib name="starling" />
+	<haxelib name="format" />
+	<haxelib name="feathersui-starling" />
+	<haxelib name="msignal" />
+	
+	<assets path="Assets/textures" rename="assets/textures"  embed="false" />
+	<assets path="Assets/backgrounds" rename="assets/backgrounds"  embed="false" />
+	<assets path="Assets/sounds" rename="assets/sounds"  embed="false" />
+	<assets path="Assets/localization" rename="assets/localization"  embed="false" />
+	<assets path="Assets/particles" rename="assets/particles"  embed="false" />
+	<assets path="Assets/layouts" rename="assets/layouts"  embed="true" />
+	
+</project>
