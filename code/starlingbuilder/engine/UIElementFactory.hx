@@ -27,7 +27,6 @@ class UIElementFactory {
 	private function setDefaultParams(obj:Dynamic, data:Dynamic):Void {}
 
 	private function setDirectParams(obj:Dynamic, data:Dynamic):Void {
-		// trace("setDirectParams Obj = " + obj);
 		var array:Array<Dynamic> = [];
 		var id:String;
 		for (id in Reflect.fields(data.params)) {
@@ -36,16 +35,12 @@ class UIElementFactory {
 		sortParams(array, PARAMS);
 
 		for (id in array) {
-			trace("id = " + id);
 			var item:Dynamic = data.params[id];
 
 			if (item != null && Reflect.hasField(item, "cls")) {
 				Reflect.setProperty(obj, id, create(item));
 			} else {
-				// trace("Obj before = " + obj);
 				Reflect.setProperty(obj, id, item);
-				// trace("Obj after = " + obj);
-				// trace("Has name Field " + Reflect.hasField(obj, "__name"));
 			}
 		}
 	}
@@ -76,7 +71,6 @@ class UIElementFactory {
 		var data:Dynamic;
 
 		var clsName:String = param.cls;
-		trace("clsName = " + clsName);
 		switch (clsName) {
 			case "starling.textures.Texture":
 				{
@@ -174,7 +168,6 @@ class UIElementFactory {
 	}
 
 	public function create(data:Dynamic):Dynamic {
-		//trace("create data = " + data);
 		var obj:Dynamic;
 		var constructorParams:Array<Dynamic> = cast data.constructorParams;
 
@@ -190,13 +183,10 @@ class UIElementFactory {
 			&& data.customParams.customComponentClass != "null") {
 			try {
 				cls = Type.resolveClass(data.customParams.customComponentClass);
-				trace("cls is : ", cls);
 			} catch (e:Error) {
 				trace("Error : Class " + data.customParams.customComponentClass + " can't be instantiated.");
 			}
 		}
-
-		//trace("data class " + data.cls);
 
 		// hack: flash.geom.Rectangle only exists in flash target
 		#if (display || !flash)
@@ -206,12 +196,10 @@ class UIElementFactory {
 		#end
 
 		if (cls == null) {
-			//trace("cls is null so cls is " + data.cls);
 			cls = Type.resolveClass(replaceFeathersNamespace(data.cls));
 		}
 
 		var args:Array<Dynamic> = createArgumentsFromParams(constructorParams);
-		//trace("args =  " + args);
 
 		try {
 			obj = Type.createInstance(cls, args);
@@ -226,7 +214,6 @@ class UIElementFactory {
 	}
 
 	private function createArgumentsFromParams(params:Array<Dynamic>):Array<Dynamic> {
-		//trace("createArgumentsFromParams = " + params);
 		var args:Array<Dynamic> = [];
 
 		if (params != null) {

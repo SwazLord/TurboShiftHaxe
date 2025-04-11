@@ -124,7 +124,6 @@ class UIBuilder implements IUIBuilder {
 	 * @see #create()
 	 */
 	public function load(data:Dynamic, trimLeadingSpace:Bool = true, binder:Dynamic = null):Dynamic {
-		trace("called load");
 		if (_dataFormatter != null)
 			data = _dataFormatter.read(data);
 
@@ -138,7 +137,6 @@ class UIBuilder implements IUIBuilder {
 		localizeTexts(root, paramsDict);
 
 		if (binder) {
-			trace("paramsDict length = " + Lambda.count(paramsDict));
 			bind(binder, paramsDict);
 		}
 
@@ -146,20 +144,8 @@ class UIBuilder implements IUIBuilder {
 	}
 
 	private function loadTree(data:Dynamic, factory:UIElementFactory, paramsDict:Map<DisplayObject, Dynamic>):DisplayObject {
-		// trace("called loadTree with data" + data);
 		var obj:DisplayObject = cast(factory.create(data), DisplayObject);
 		paramsDict[obj] = data;
-		trace("paramsDict length = " + Lambda.count(paramsDict));
-		// trace("paramsDict keys = " + paramsDict.keys());
-		/* for (obj in paramsDict.keys()) {
-			trace("loadTree - Obj " + obj);
-			trace("loadTree - Obj name " + obj.name);
-			trace("loadTree - paramsDict[obj] = " + paramsDict[obj]);
-			trace("loadTree - field(obj) = " + Reflect.field(obj, "__name"));
-			trace("loadTree - hasField(obj) = " + Reflect.hasField(obj, "__name"));
-			trace("loadTree - fields(obj) = " + Reflect.fields(obj));
-			trace("loadTree - getProperty(obj) = " + Reflect.getProperty(obj, "__name"));
-		}*/
 
 		var container:DisplayObjectContainer = null;
 
@@ -167,19 +153,15 @@ class UIBuilder implements IUIBuilder {
 			container = cast obj;
 
 		if (container != null) {
-			trace("this is a container");
 			if (data.children) {
-				trace("has data.children");
 				for (item in cast(data.children, Array<Dynamic>)) {
 					if (!_forEditor && item.customParams && item.customParams.forEditor)
 						continue;
-					trace("container.addChild for item = " + item);
 					container.addChild(loadTree(item, factory, paramsDict));
 				}
 			}
 
 			if (isExternalSource(data)) {
-				trace("isExternal");
 				var externalData:Dynamic = _dataFormatter.read(_assetMediator.getExternalData(data.customParams.source));
 				// container.addChild(create(externalData));
 				// paramsDict[obj] = data;
@@ -207,28 +189,21 @@ class UIBuilder implements IUIBuilder {
 	 */
 	public static function bind(view:Dynamic, paramsDict:Map<DisplayObject, Dynamic>):Void {
 		for (obj in paramsDict.keys()) {
-			/*trace("bind - Obj " + obj);
-				trace("bind - Obj name " + obj.name);
-				trace("Type.getInstanceFields = " + Type.getInstanceFields(Type.getClass(obj)));
-				 trace("bind - paramsDict[obj] = " + paramsDict[obj]);
-					trace("bind - field(obj) = " + Reflect.field(obj, "__name"));
-					trace("bind - hasField(obj) = " + Reflect.hasField(obj, "__name"));
-					trace("bind - fields(obj) = " + Reflect.fields(obj));
-					trace("bind - getProperty(obj) = " + Reflect.getProperty(obj, "__name")); */
-			var name:String = null;
+			if (!Reflect.hasField(obj, "__name"))
+				continue;
 
-			if (Reflect.hasField(obj, "__name")) {
-				name = Reflect.getProperty(obj, "__name");
-				if (name != null && name.charAt(0) == "_") {
-					if (Type.getInstanceFields(Type.getClass(view)).contains(name)) {
-						Reflect.setProperty(view, name, obj);
-						if (Std.isOfType(obj, ICustomComponent)) {
-							cast(obj, ICustomComponent).initComponent();
-						}
-					} else {
-						throw new Error("Property " + name + " not defined in " + Lib.getQualifiedClassName(view));
-					}
+			var name:String = Reflect.getProperty(obj, "__name");
+			if (name == null || name.charAt(0) != "_")
+				continue;
+
+			if (Type.getInstanceFields(Type.getClass(view)).contains(name)) {
+				Reflect.setProperty(view, name, obj);
+
+				if (Std.isOfType(obj, ICustomComponent)) {
+					cast(obj, ICustomComponent).initComponent();
 				}
+			} else {
+				throw new Error("Property " + name + " not defined in class : " + Lib.getQualifiedClassName(view));
 			}
 		}
 	}
@@ -319,7 +294,6 @@ class UIBuilder implements IUIBuilder {
 	 * @see #load()
 	 */
 	public function create(data:Dynamic, trimLeadingSpace:Bool = true, binder:Dynamic = null):Dynamic {
-		trace("create");
 		return load(data, trimLeadingSpace, binder).object;
 	}
 
