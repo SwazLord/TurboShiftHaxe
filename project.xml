@@ -15,6 +15,8 @@
 	<haxelib name="format" />
 	<haxelib name="feathersui-starling" />
 	<haxelib name="msignal" />
+
+	<!--<haxeflag name="-dce no" />-->
 	
 	<assets path="Assets/textures" rename="assets/textures"  embed="false" />
 	<assets path="Assets/backgrounds" rename="assets/backgrounds"  embed="false" />

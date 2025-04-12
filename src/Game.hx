@@ -59,7 +59,6 @@ class Game extends Sprite {
 		_asst_manager.enqueue([
 			"assets/textures/texture.png",
 			"assets/textures/texture.xml",
-			"assets/textures/lilita_one.png",
 			"assets/textures/lilita_one.fnt",
 			"assets/backgrounds/road_tile.png",
 			"assets/particles/bigExplosion.sde",

@@ -16,6 +16,7 @@ import feathers.starling.core.PopUpManager;
 import starling.display.Image;
 import starling.animation.Tween;
 
+@:keep
 class Lobby extends Sprite implements IState {
 	private var _main_sprite:Sprite;
 

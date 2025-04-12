@@ -24,7 +24,7 @@ class Main extends Sprite {
 		stage.align = StageAlign.TOP_LEFT;
 		stage.scaleMode = StageScaleMode.NO_SCALE;
 		stage.displayState = StageDisplayState.NORMAL;
-		stage.color = Color.GREEN;
+		stage.color = Color.BLACK;
 	}
 
 	private function addedToStage(event:flash.events.Event):Void {

@@ -88,10 +88,10 @@ class RaceGame extends Sprite implements IState {
 	}
 
 	public function resetRace():Void {
-		for (enemy in _activeEnemies) {
+		for (i in 0..._activeEnemies.length) {
+			var enemy:EnemyCar = _activeEnemies[i];
 			enemy.y = -enemy.height;
 			enemy.reset();
-
 			_enemyPool.returnSprite(enemy);
 		}
 
