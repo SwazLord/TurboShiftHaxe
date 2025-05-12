@@ -1,10 +1,8 @@
 import starling.display.Sprite;
 import starling.display.Button;
 import starling.events.Event;
-import feathers.starling.core.PopUpManager;
-import feathers.starling.layout.AnchorLayout;
-import feathers.starling.layout.VerticalLayout;
 import feathers.starling.controls.LayoutGroup;
+import feathers.starling.core.PopUpManager;
 import starling.events.TouchEvent;
 import starling.events.Touch;
 import starling.events.TouchPhase;
@@ -15,35 +13,28 @@ class LanguagePopup extends Sprite {
 	public var _close_button:Button;
 	public var _main_layout:LayoutGroup;
 
-	public static var linkers:Array<Dynamic> = [AnchorLayout, VerticalLayout];
-
 	public function new() {
 		super();
-		_main_sprite = new Sprite();
-		_main_sprite = try cast(Game.current_instance._ui_builder.create(ParsedLayouts.language_popup_ui, false, this), Sprite) catch (e:Dynamic) null;
+		var ui_object:Dynamic = TurboShift.root_class.asset_manager.getObject("languages_ui");
+		_main_sprite = try cast(TurboShift.root_class.ui_builder.create(ui_object, false, this), Sprite) catch (e:Dynamic) null;
 		addChild(_main_sprite);
 
 		_close_button.addEventListener(Event.TRIGGERED, onClose);
-		_main_layout.addEventListener(TouchEvent.TOUCH, onTouch);
-	}
-
-	private function onTouch(event:TouchEvent):Void {
-		var touch_ended:Touch = event.getTouch(stage, TouchPhase.ENDED);
-		var button:Button = try cast(event.target, Button) catch (e:Dynamic) null;
-		if (touch_ended != null && button != null) {
-			trace("button.name = ", button.name);
-			Game.current_instance.locale = button.name;
-			_close_button.dispatchEventWith(Event.TRIGGERED, true);
-		}
+		_main_layout.addEventListener(TouchEvent.TOUCH, onTouchLayout);
 	}
 
 	private function onClose(event:Event):Void {
+		PopUpManager.removePopUp(this);
 		_close_button.removeEventListener(Event.TRIGGERED, onClose);
-		PopUpManager.removePopUp(this, true);
 	}
 
-	public function destroy():Void {
-		_main_sprite.removeFromParent(true);
-		_main_sprite = null;
+	private function onTouchLayout(event:TouchEvent):Void {
+		var touch_ended:Touch = event.getTouch(stage, TouchPhase.ENDED);
+		var button:Button = try cast(event.target, Button) catch (e:Dynamic) null;
+		if (touch_ended != null) {
+			trace("button name = " + button.name);
+			TurboShift.root_class.locale = button.name;
+			_close_button.dispatchEventWith(Event.TRIGGERED, true);
+		}
 	}
 }

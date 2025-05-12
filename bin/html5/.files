@@ -1,5 +1,5 @@
-bin/html5/bin/assets/textures/lilita_one.fnt
-bin/html5/bin/assets/textures/lilita_one.png
+bin/html5/bin/assets/textures/LilitaOne.fnt
+bin/html5/bin/assets/textures/LilitaOne.png
 bin/html5/bin/assets/textures/texture.png
 bin/html5/bin/assets/textures/texture.xml
 bin/html5/bin/assets/backgrounds/road_tile.png
@@ -12,13 +12,12 @@ bin/html5/bin/assets/sounds/new_high_score.mp3
 bin/html5/bin/assets/localization/strings.json
 bin/html5/bin/assets/particles/bigExplosion.sde
 bin/html5/bin/assets/particles/blazingFire.sde
-bin/html5/bin/assets/particles/pinkSmoke.sde
-bin/html5/bin/assets/layouts/info_popup_ui.json
-bin/html5/bin/assets/layouts/language_popup_ui.json
+bin/html5/bin/assets/particles/smoke.sde
+bin/html5/bin/assets/layouts/languages_ui.json
 bin/html5/bin/assets/layouts/leaderboard_item_ui.json
-bin/html5/bin/assets/layouts/leaderboard_popup_ui.json
+bin/html5/bin/assets/layouts/leaderboard_ui.json
 bin/html5/bin/assets/layouts/lobby_ui.json
-bin/html5/bin/assets/layouts/race_game_ui.json
+bin/html5/bin/assets/layouts/race_ui.json
 bin/html5/bin/assets/layouts/road_ui.json
 bin/html5/bin/assets/layouts/round_over_ui.json
 bin/html5/bin/manifest/default.json

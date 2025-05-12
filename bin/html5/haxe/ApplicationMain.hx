@@ -35,7 +35,7 @@ class ApplicationMain
 		ManifestResources.init(config);
 		#end
 
-		app.meta["build"] = "1";
+		app.meta["build"] = "11";
 		app.meta["company"] = "The Amature Dev";
 		app.meta["file"] = "TurboShiftHaxe";
 		app.meta["name"] = "TurboShiftHaxe";
@@ -185,7 +185,7 @@ class ApplicationMain
 	{
 		var hasMain = false;
 
-		switch (Context.follow(Context.getType("Main")))
+		switch (Context.follow(Context.getType("TurboShift")))
 		{
 			case TInst(t, params):
 
@@ -201,7 +201,7 @@ class ApplicationMain
 
 				if (hasMain)
 				{
-					return Context.parse("@:privateAccess Main.main()", Context.currentPos());
+					return Context.parse("@:privateAccess TurboShift.main()", Context.currentPos());
 				}
 				else if (type.constructor != null)
 				{
@@ -220,12 +220,12 @@ class ApplicationMain
 				}
 				else
 				{
-					Context.fatalError("Main class \"Main\" has neither a static main nor a constructor.", Context.currentPos());
+					Context.fatalError("Main class \"TurboShift\" has neither a static main nor a constructor.", Context.currentPos());
 				}
 
 			default:
 
-				Context.fatalError("Main class \"Main\" isn't a class.", Context.currentPos());
+				Context.fatalError("Main class \"TurboShift\" isn't a class.", Context.currentPos());
 		}
 
 		return null;
@@ -287,7 +287,7 @@ class ApplicationMain
 
 #if !macro
 @:build(DocumentClass.build())
-@:keep @:dox(hide) class DocumentClass extends Main {}
+@:keep @:dox(hide) class DocumentClass extends TurboShift {}
 #else
 class DocumentClass
 {

@@ -36,6 +36,7 @@ class DefaultLocalization implements ILocalization {
 	 * @inheritDoc
 	 */
 	public function getLocalizedText(key:String):String {
+		//trace("find key - " + key + " in " + _data + " _locale = " + _locale);
 		if (_locale != null && Reflect.hasField(_data, key) && Reflect.hasField(Reflect.field(_data, key), _locale)) {
 			return Reflect.field(Reflect.field(_data, key), _locale);
 		} else {

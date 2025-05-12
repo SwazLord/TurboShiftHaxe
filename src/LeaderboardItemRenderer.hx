@@ -12,22 +12,24 @@ class LeaderboardItemRenderer extends LayoutGroupListItemRenderer {
 
 	override private function initialize():Void {
 		super.initialize();
-		_main_sprite = try cast(Game.current_instance._ui_builder.create(ParsedLayouts.leaderboard_item_ui, true, this), Sprite) catch (e:Dynamic) null;
+		var ui_object:Dynamic = TurboShift.root_class.asset_manager.getObject("leaderboard_item_ui");
+		_main_sprite = try cast(TurboShift.root_class.ui_builder.create(ui_object, true, this), Sprite) catch (e:Dynamic) null;
 		addChild(_main_sprite);
 	}
 
 	override private function commitData():Void {
-		if (this._data != null) {
+		if (this.data != null) {
 			_rank_text.text = Std.string(this.data.rank);
 			_name_text.text = this.data.name;
 			_score_text.text = Std.string(this.data.score);
 
 			if (this.data.name == "YOU") {
+				_name_text.text = TurboShift.root_class.ui_builder.localization.getLocalizedText("text_15");
 				_name_text.format.color = Color.RED;
 				_score_text.format.color = Color.LIME;
 			} else {
-				_name_text.format.color = 0x49f0ff;
-				_score_text.format.color = 0xfffa39;
+				_name_text.format.color = 0x49f0fc;
+				_score_text.format.color = 0xfff902;
 			}
 		}
 	}

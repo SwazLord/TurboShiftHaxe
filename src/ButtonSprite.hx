@@ -1,20 +1,13 @@
 import starling.display.Sprite;
-import starlingbuilder.engine.ICustomComponent;
 import starling.display.Image;
+import starlingbuilder.engine.ICustomComponent;
 
 class ButtonSprite extends Sprite implements ICustomComponent
 {
     public var disabled(get, set) : Bool;
 
-    private var ban_icon : Image;
+    private var _ban_icon : Image;
     private var _disabled : Bool;
-    
-    public function initComponent() : Void
-    {
-        this.touchGroup = true;
-        ban_icon = try cast(getChildByName("ban_icon"), Image) catch(e:Dynamic) null;
-        ban_icon.visible = disabled;
-    }
     
     private function get_disabled() : Bool
     {
@@ -23,8 +16,15 @@ class ButtonSprite extends Sprite implements ICustomComponent
     
     private function set_disabled(value : Bool) : Bool
     {
-        ban_icon.visible = _disabled = value;
+        _ban_icon.visible = _disabled = value;
         return value;
+    }
+    
+    
+    public function initComponent() : Void
+    {
+        this.touchGroup = true;
+        _ban_icon = try cast(getChildByName("ban_icon"), Image) catch(e:Dynamic) null;
     }
 
     public function new()

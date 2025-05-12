@@ -1,12 +1,10 @@
 import starling.display.Sprite;
 import starling.display.Button;
-import feathers.starling.controls.List;
 import starling.events.Event;
+import feathers.starling.core.PopUpManager;
+import feathers.starling.controls.List;
 import feathers.starling.controls.renderers.IListItemRenderer;
 import feathers.starling.data.ArrayCollection;
-import feathers.starling.core.PopUpManager;
-import feathers.starling.layout.AnchorLayout;
-import feathers.starling.layout.VerticalLayout;
 
 class LeaderboardPopup extends Sprite {
 	private var _main_sprite:Sprite;
@@ -57,26 +55,23 @@ class LeaderboardPopup extends Sprite {
 		}
 	];
 
-	public static var linkers:Array<Dynamic> = [AnchorLayout, VerticalLayout];
-
 	public function new() {
 		super();
-		_main_sprite = new Sprite();
-		_main_sprite = try cast(Game.current_instance._ui_builder.create(ParsedLayouts.leaderboard_popup_ui, false, this), Sprite) catch (e:Dynamic) null;
+		var ui_object:Dynamic = TurboShift.root_class.asset_manager.getObject("leaderboard_ui");
+		_main_sprite = try cast(TurboShift.root_class.ui_builder.create(ui_object, false, this), Sprite) catch (e:Dynamic) null;
 		addChild(_main_sprite);
 
 		_close_button.addEventListener(Event.TRIGGERED, onClose);
-
-		_list.isSelectable = false;
 
 		_list.itemRendererFactory = function():IListItemRenderer {
 			return new LeaderboardItemRenderer();
 		};
 
-		// Add player score
+		_list.dataProvider = new ArrayCollection();
+
 		_leaderboard.push({
 			name: "YOU",
-			score: Game.current_instance.topScore
+			score: TurboShift.root_class.best_score
 		});
 
 		// Sort the array by score in descending order
@@ -90,8 +85,6 @@ class LeaderboardPopup extends Sprite {
 			return 0;
 		});
 
-		_list.dataProvider = new ArrayCollection();
-
 		var len:Int = _leaderboard.length;
 		for (i in 0...len) {
 			var player:Dynamic = _leaderboard[i];
@@ -104,18 +97,8 @@ class LeaderboardPopup extends Sprite {
 	}
 
 	private function onClose(event:Event):Void {
+		TurboShift.root_class.sfx_player.playFx("button_click");
 		_close_button.removeEventListener(Event.TRIGGERED, onClose);
-		Game.current_instance._sfxPlayer.playFx("button_click");
 		PopUpManager.removePopUp(this);
-	}
-
-	public function destroy():Void {
-		_main_sprite.removeFromParent(true);
-		_main_sprite = null;
-
-		_leaderboard = [];
-
-		_list.removeFromParent(true);
-		_list = null;
 	}
 }

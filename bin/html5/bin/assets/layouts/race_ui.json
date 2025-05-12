@@ -84,7 +84,7 @@
                 "customParams":{},
                 "params":{
                   "color":16777215,
-                  "font":"lilita_one",
+                  "font":"lilitaone",
                   "horizontalAlign":"right",
                   "size":40
                 }
@@ -115,15 +115,15 @@
                 "cls":"starling.text.TextFormat",
                 "customParams":{},
                 "params":{
-                  "color":16771897,
-                  "font":"lilita_one",
+                  "color":16514081,
+                  "font":"lilitaone",
                   "horizontalAlign":"left",
                   "size":40
                 }
               },
               "height":50,
               "name":"_score_text",
-              "text":"9999\r",
+              "text":"9999",
               "width":100,
               "x":220
             }
@@ -168,7 +168,7 @@
     }
   },
   "setting":{
-    "canvasColor":16777215,
+    "canvasColor":16580349,
     "canvasSize":{
       "x":640,
       "y":960

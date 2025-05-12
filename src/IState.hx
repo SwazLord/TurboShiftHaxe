@@ -2,7 +2,7 @@
 interface IState
 {
 
-    function update() : Void
+    function update(timePassed : Float) : Void
     ;
     function destroy() : Void
     ;

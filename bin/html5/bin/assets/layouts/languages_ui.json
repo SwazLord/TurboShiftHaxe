@@ -15,18 +15,20 @@
                 ],
                 "customParams":{},
                 "params":{
+                  "color":16649728,
                   "name":"ribbon",
                   "scale9Grid":{
                     "cls":"flash.geom.Rectangle",
                     "customParams":{},
                     "params":{
-                      "height":5,
-                      "width":40,
-                      "x":85,
-                      "y":32
+                      "height":24,
+                      "width":83,
+                      "x":62,
+                      "y":18
                     }
                   },
-                  "scaleX":1.69
+                  "scaleX":1.45,
+                  "scaleY":1.02
                 }
               },
               {
@@ -43,7 +45,7 @@
                   }
                 ],
                 "customParams":{
-                  "localizeKey":"text_09"
+                  "localizeKey":"text_05"
                 },
                 "params":{
                   "autoScale":true,
@@ -53,13 +55,14 @@
                     "customParams":{},
                     "params":{
                       "color":16777215,
-                      "font":"lilita_one",
-                      "size":40
+                      "font":"lilitaone",
+                      "size":24
                     }
                   },
                   "height":50,
                   "name":"header_text",
-                  "width":350
+                  "width":280,
+                  "x":10.08
                 }
               }
             ],
@@ -67,49 +70,137 @@
             "customParams":{},
             "params":{
               "name":"sprite",
-              "pivotX":175,
-              "pivotY":29.5,
-              "x":250
+              "pivotX":150,
+              "pivotY":25,
+              "x":200
             }
           },
           {
-            "cls":"feathers.controls.List",
-            "customParams":{},
-            "params":{
-              "backgroundSkin":{
-                "cls":"starling.display.Image",
+            "children":[
+              {
+                "cls":"starling.display.Button",
                 "constructorParams":[
                   {
                     "cls":"starling.textures.Texture",
-                    "textureName":"panelInset_beige"
+                    "textureName":"button_normal"
                   }
                 ],
-                "customParams":{},
+                "customParams":{
+                  "localizeKey":"text_06"
+                },
                 "params":{
-                  "name":null,
+                  "height":60,
+                  "name":"en",
                   "scale9Grid":{
                     "cls":"flash.geom.Rectangle",
                     "customParams":{},
                     "params":{
-                      "height":31,
-                      "width":11,
-                      "x":26,
-                      "y":30
+                      "height":5,
+                      "width":33,
+                      "x":49,
+                      "y":21
                     }
                   },
-                  "scaleX":4.84,
-                  "scaleY":5.32
+                  "textFormat":{
+                    "cls":"starling.text.TextFormat",
+                    "constructorParams":[],
+                    "customParams":{},
+                    "params":{
+                      "color":16711676,
+                      "font":"lilitaone",
+                      "size":30
+                    }
+                  },
+                  "width":220
                 }
               },
-              "height":500,
+              {
+                "cls":"starling.display.Button",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"button_normal"
+                  }
+                ],
+                "customParams":{
+                  "localizeKey":"text_07"
+                },
+                "params":{
+                  "height":60,
+                  "name":"fr",
+                  "scale9Grid":{
+                    "cls":"flash.geom.Rectangle",
+                    "customParams":{},
+                    "params":{
+                      "height":5,
+                      "width":33,
+                      "x":49,
+                      "y":21
+                    }
+                  },
+                  "textFormat":{
+                    "cls":"starling.text.TextFormat",
+                    "constructorParams":[],
+                    "customParams":{},
+                    "params":{
+                      "color":16711676,
+                      "font":"lilitaone",
+                      "size":30
+                    }
+                  },
+                  "width":220,
+                  "y":65
+                }
+              },
+              {
+                "cls":"starling.display.Button",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"button_normal"
+                  }
+                ],
+                "customParams":{
+                  "localizeKey":"text_08"
+                },
+                "params":{
+                  "height":60,
+                  "name":"de",
+                  "scale9Grid":{
+                    "cls":"flash.geom.Rectangle",
+                    "customParams":{},
+                    "params":{
+                      "height":5,
+                      "width":33,
+                      "x":49,
+                      "y":21
+                    }
+                  },
+                  "textFormat":{
+                    "cls":"starling.text.TextFormat",
+                    "constructorParams":[],
+                    "customParams":{},
+                    "params":{
+                      "color":16711676,
+                      "font":"lilitaone",
+                      "size":30
+                    }
+                  },
+                  "width":220,
+                  "y":130
+                }
+              }
+            ],
+            "cls":"feathers.controls.LayoutGroup",
+            "customParams":{},
+            "params":{
               "layout":{
                 "cls":"feathers.layout.VerticalLayout",
-                "constructorParams":[],
                 "customParams":{},
                 "params":{
                   "gap":5,
                   "horizontalAlign":"center",
-                  "padding":15
+                  "verticalAlign":"middle"
                 }
               },
               "layoutData":{
@@ -117,13 +208,12 @@
                 "customParams":{},
                 "params":{
                   "horizontalCenter":0,
-                  "verticalCenter":10
+                  "verticalCenter":0
                 }
               },
-              "name":"_list",
-              "width":450,
-              "x":25,
-              "y":60
+              "name":"_main_layout",
+              "x":90,
+              "y":55
             }
           },
           {
@@ -136,20 +226,17 @@
             ],
             "customParams":{},
             "params":{
-              "height":71,
+              "height":50,
               "name":"_close_button",
-              "pivotX":34.5,
-              "pivotY":35.5,
-              "scaleWhenDown":0.98,
               "textFormat":{
                 "cls":"starling.text.TextFormat",
                 "constructorParams":[],
                 "customParams":{},
                 "params":{}
               },
-              "width":69,
-              "x":480,
-              "y":15
+              "width":50,
+              "x":362.8,
+              "y":-15
             }
           }
         ],
@@ -161,7 +248,7 @@
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
-                "textureName":"panel_brown"
+                "textureName":"item_back"
               }
             ],
             "customParams":{},
@@ -173,15 +260,15 @@
                 "params":{
                   "height":40,
                   "width":32,
-                  "x":35,
+                  "x":24,
                   "y":30
                 }
               },
               "scaleX":5,
-              "scaleY":6
+              "scaleY":3.03
             }
           },
-          "height":600,
+          "height":300,
           "layout":{
             "cls":"feathers.layout.AnchorLayout",
             "customParams":{},
@@ -196,9 +283,9 @@
             }
           },
           "name":"layoutGroup",
-          "width":500,
-          "x":70,
-          "y":180
+          "width":400,
+          "x":120,
+          "y":330
         }
       }
     ],
@@ -221,8 +308,8 @@
         ],
         "customParams":{},
         "params":{
-          "alpha":0.5,
-          "color":4144959,
+          "alpha":0.3,
+          "color":524800,
           "name":null,
           "scaleX":12.8,
           "scaleY":19.2

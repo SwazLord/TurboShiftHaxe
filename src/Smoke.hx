@@ -6,7 +6,7 @@ import openfl.events.Event;
 import starling.events.Event;
 import starling.events.EnterFrameEvent;
 
-class BigExplosion extends Sprite {
+class Smoke extends Sprite {
 	private var _sim_container:Sprite;
 	private var _player:SimPlayer;
 	private var _loader:SimLoader;
@@ -19,7 +19,7 @@ class BigExplosion extends Sprite {
 
 		_loader = new SimLoader();
 		_loader.addEventListener(flash.events.Event.COMPLETE, onSimulationLoaded);
-		_loader.loadSim(TurboShift.root_class.asset_manager.getByteArray("bigExplosion"));
+		_loader.loadSim(TurboShift.root_class.asset_manager.getByteArray("smoke"));
 
 		_player = new SimPlayer();
 	}
@@ -29,21 +29,16 @@ class BigExplosion extends Sprite {
 		_project = _loader.createProjectInstance();
 		_player.setProject(_project);
 		_player.setRenderTarget(_sim_container);
-	}
-
-	public function play():Void {
 		addEventListener(starling.events.Event.ENTER_FRAME, onEnterFrame);
 		_project.resetSimulation();
 	}
 
 	private function onEnterFrame(event:EnterFrameEvent):Void {
 		_player.stepSimulation(event.passedTime);
-		if (_project.numberOfParticles == 0) {
-			removeEventListener(starling.events.Event.ENTER_FRAME, onEnterFrame);
-		}
 	}
 
 	public function destroy():Void {
+		removeEventListener(starling.events.Event.ENTER_FRAME, onEnterFrame);
 		_player = null;
 		_project.destroy();
 		_project = null;

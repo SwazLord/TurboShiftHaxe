@@ -1,52 +1,50 @@
 import starling.display.Sprite;
+import starling.filters.SineWaveFilter;
 import starlingbuilder.engine.ICustomComponent;
 import starling.display.Image;
 import starling.core.Starling;
-import starling.filters.SineWaveFilter;
 
 class PlayerCar extends Sprite implements ICustomComponent {
-	private var car_image:Image;
-	private var blazing_fire:BlazingFire;
-	private var damaged_filter:SineWaveFilter;
+	private var _damaged_filter:SineWaveFilter;
+	private var _blazing_fire:BlazingFire;
+	private var player_car:Image;
+
+	public function new() {
+		super();
+	}
 
 	public function initComponent():Void {
-		car_image = try cast(getChildByName("player_car"), Image) catch (e:Dynamic) null;
-		damaged_filter = try cast(car_image.filter, SineWaveFilter) catch (e:Dynamic) null;
-		car_image.filter = null;
+		player_car = try cast(getChildByName("player_car"), Image) catch (e:Dynamic) null;
+		_damaged_filter = try cast(player_car.filter, SineWaveFilter) catch (e:Dynamic) null;
+		player_car.filter = null;
 	}
 
 	public function reset():Void {
 		this.rotation = 0;
-
-		car_image.filter = null;
-
-		if (blazing_fire != null) {
-			blazing_fire.destroy();
-			blazing_fire.removeFromParent(true);
-			blazing_fire = null;
-		}
+		player_car.filter = null;
+		removeBlazingFire();
 	}
 
 	public function crashed():Void {
-		car_image.filter = damaged_filter;
+		player_car.filter = _damaged_filter;
+		Starling.current.juggler.delayCall(addBlazingFire, 1);
+	}
 
-		Starling.current.juggler.delayCall(function():Void {
-			blazing_fire = new BlazingFire();
-			addChild(blazing_fire);
-			blazing_fire.x = 50;
-		}, 1);
+	private function addBlazingFire():Void {
+		_blazing_fire = new BlazingFire();
+		addChild(_blazing_fire);
+		_blazing_fire.x = 50;
+	}
+
+	private function removeBlazingFire():Void {
+		_blazing_fire.destroy();
+		_blazing_fire.removeFromParent(true);
+		_blazing_fire = null;
 	}
 
 	public function destroy():Void {
-		blazing_fire.destroy();
-		blazing_fire.removeFromParent(true);
-		blazing_fire = null;
-
-		car_image.filter = null;
-		damaged_filter = null;
-	}
-
-	public function new() {
-		super();
+		removeBlazingFire();
+		_damaged_filter = null;
+		player_car.filter = null;
 	}
 }

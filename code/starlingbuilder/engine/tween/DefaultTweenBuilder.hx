@@ -81,6 +81,7 @@ class DefaultTweenBuilder implements ITweenBuilder {
 
 	private function createTweenFrom(obj:DisplayObject, data:Dynamic):Void {
 		if (!Reflect.hasField(data, "time")) {
+			trace("Missing tween param: time");
 			return;
 		}
 

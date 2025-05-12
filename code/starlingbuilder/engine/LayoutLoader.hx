@@ -70,6 +70,7 @@ class LayoutLoader {
 	 * @return parsed as3 object
 	 */
 	public function load(name:String):Dynamic {
+		trace("class name = ",name);
 		var value:Dynamic = Reflect.getProperty(_layoutCls, name);
 
 		if (value == null) {
