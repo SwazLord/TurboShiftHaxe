@@ -9,10 +9,6 @@ class PlayerCar extends Sprite implements ICustomComponent {
 	private var _blazing_fire:BlazingFire;
 	private var player_car:Image;
 
-	public function new() {
-		super();
-	}
-
 	public function initComponent():Void {
 		player_car = try cast(getChildByName("player_car"), Image) catch (e:Dynamic) null;
 		_damaged_filter = try cast(player_car.filter, SineWaveFilter) catch (e:Dynamic) null;
